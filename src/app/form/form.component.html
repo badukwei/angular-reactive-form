@@ -10,7 +10,7 @@
     <ul *ngIf="form.controls.email.hasError('emailRequire') && !form.controls.email.pristine">
       <li>Email needed</li>
     </ul>
-    <ul *ngIf="form.controls.email.hasError('emailRequire') && !form.controls.email.pristine">
+    <ul *ngIf="form.controls.email.hasError('emailInvalid') && !form.controls.email.pristine">
       <li>
         Type the correct email
       </li>
