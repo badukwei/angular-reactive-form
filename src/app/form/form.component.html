@@ -1,0 +1,57 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <fieldset>
+    <input class="" type="text" placeholder="name" formControlName="name" />
+    <ul *ngIf="form.controls.name.errors && form.controls.name.dirty">
+      <li *ngIf="form.controls.name.errors['required']">Account Name needed</li>
+    </ul>
+  </fieldset>
+  <fieldset>
+    <input class="" type="text" placeholder="email" formControlName="email" />
+    <ul *ngIf="form.controls.email.hasError('emailRequire') && !form.controls.email.pristine">
+      <li>Email needed</li>
+    </ul>
+    <ul *ngIf="form.controls.email.hasError('emailRequire') && !form.controls.email.pristine">
+      <li>
+        Type the correct email
+      </li>
+    </ul>
+  </fieldset>
+  <fieldset>
+    <input
+      class=""
+      type="text"
+      placeholder="description"
+      formControlName="description"
+    />
+  </fieldset>
+  <fieldset>
+    <input
+      class=""
+      type="text"
+      placeholder="password"
+      formControlName="password"
+    />
+    <ul *ngIf="form.controls.password.errors && form.controls.password.dirty">
+      <li *ngIf="form.controls.password.errors['required']">Password needed</li>
+      <li *ngIf="form.controls.password.errors['minlength']">
+        At least
+        {{ form.controls.password.errors["minlength"].requiredLength }}
+      </li>
+    </ul>
+  </fieldset>
+  <fieldset>
+    <input
+      class=""
+      type="text"
+      placeholder="Enter tags"
+      #tag
+      (keyup.enter)="addTag(tag.value); tag.value = ''"
+      (keydown.enter)="$event.preventDefault()"
+    />
+    <ul *ngFor="let tag of form.controls['tags'].controls; let index = index">
+      <button (click)="removeTag(index)">remove the tag</button>
+      <li>{{ tag.value }}</li>
+    </ul>
+  </fieldset>
+  <button type="submit">Submit</button>
+</form>
